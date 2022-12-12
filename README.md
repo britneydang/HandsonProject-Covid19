@@ -2,6 +2,8 @@
 
 Data Resources:
 In this project, I will use the COVID-19 data from the EU Center for Disease Prevention and Control website (ECDC).
+- ECDC Website for Covid-19 Data - https://www.ecdc.europa.eu/en/covid-19/data
+- Euro Stat Website for Population Data - https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tps00010.tsv.gz
 
 Solution Architect:
 - I will use the HTTP Connector within the ADF to get the COVID-19 data (data set 1) and (as a second connector) keep the Population data (data set 2) in an Azure storage account and ingest from there.
