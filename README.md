@@ -12,7 +12,7 @@ Solution Architect:
 - Visualization report such as PowerBI can be built from this data.
 
 Technologies:
-- Use ADF for all data integration and orchestration.
+- Use Azure Data Factory for all data integration and orchestration.
 - Transformation tools: Data Flows (simple transformation, code-free), HDInsight (complex, code-required, Hive/Pig), DataBricks(complex, code-required, Spark/Python).
 - Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2 (can add the big data solutions like Hadoop, Synapse Analytics), Azure SQL Database for data warehouse
 - Reporting tool: PowerBI
