@@ -50,5 +50,5 @@ In order to create a new table, I need to change Firewall settings, add my own I
   - Sink: storage account, container (raw), and the file itself that would be copied from Source.
 ![image](https://user-images.githubusercontent.com/110323703/207225866-bcf7ec29-0af1-45ce-9be0-b6a5dd5f04a7.png)
   - Create file container and upload the file into the Blob Storage Account. Go to previously created Storage Account -> Storage Browser -> Blob container -> Add Container -> private -> create -> click on newly created container and select data set #2 -> upload.
-  - Create container on the data lake storage
-
+  - Create container on the data lake storage. Go to previously created Data Lake Storage Account -> Storage Browser -> Blob container -> Add Container -> name "raw". 
+  - Create Linked Service: Go to ADF -> Manage -> Linked Service -> New -> choose Azure Blob storage -> 
