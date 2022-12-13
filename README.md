@@ -44,3 +44,11 @@ In order to create a new table, I need to change Firewall settings, add my own I
 
 2. Data Ingestion - Azure Blob Storage - data set #2 
 - I will ingest the Population data set from Azure Blob Storage to the data lake.
+- There are 3 areas: Source, Pipeline, Sink
+  - Source: storage account, container, and the original file that will be copied across. I already have had storage account, need to create a container and get the data set #2.
+  - Pipeline: 6 DF components need to be created: Linked Services for Source, Source Data Set, Linked Service for Sink, Sink Data Set, Pipeline, Copy Activity.
+  - Sink: storage account, container (raw), and the file itself that would be copied from Source.
+![image](https://user-images.githubusercontent.com/110323703/207225866-bcf7ec29-0af1-45ce-9be0-b6a5dd5f04a7.png)
+  - Create file container and upload the file into the Blob Storage Account. Go to previously created Storage Account -> Storage Browser -> Blob container -> Add Container -> private -> create -> click on newly created container and select data set #2 -> upload.
+  - Create container on the data lake storage
+
