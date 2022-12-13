@@ -7,7 +7,7 @@ Use COVID-19 data from the EU Center for Disease Prevention and Control website 
 - Euro Stat Website for Population Data - https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tps00010.tsv.gz
 
 Solution Architect:
-- I will use the HTTP Connector within the ADF to get the COVID-19 data (data set 1) and (as a second connector) keep the Population data (data set 2) in an Azure storage account and ingest from there.
+- I will use the HTTP Connector within the ADF to get the COVID-19 data (data set #1) and (as a second connector) keep the Population data (data set #2) in an Azure storage account and ingest from there.
 - Both data sets will be ingested into the Azure Data Lake Storage Gen2.
 - I will use ADF to transform data. I will use a few different tools for the transformation: Data Flows (transformation tool) within Data Factory. For HDInsight, Azure DataBricks, Data Factory will be used as orchestration tool.
 - All transformed data will be moved to Azure Data Lake Storage Gen2 for Machine Learning use.
@@ -21,7 +21,7 @@ Technologies:
 - Reporting tool: PowerBI
 
 My steps:
-Environment Setting Up:
+1. Environment Setting Up:
 - Create an Azure account and log in https://portal.azure.com/#home.
 - Create Azure Data Factory resource via Azure portal: Create a resource -> Marketplace -> Integration -> DF. After create DF and deployment is completed, Go to Resource. Click on Launch studio.
 ![image](https://user-images.githubusercontent.com/110323703/207212129-9b1dd4a4-38dd-44d3-8a90-3c63199c5ea8.png)
@@ -40,3 +40,7 @@ https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscrip
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourceGroups/COVID19-data-BritneyD/providers/Microsoft.Sql/servers/covid19serverbritneyd/databases/covid19databasebritneyd/overview
 
 In order to create a new table, I need to change Firewall settings, add my own IP and save. Go to Query Editor on right side, log in use admin/password.
+- Launch Azure Data Studion: Copy/paste server name from the newly create database into New connection server, enter other info and connect.
+
+2. Data Ingestion - Azure Blob Storage - data set #2 
+- I will ingest the Population data set from Azure Blob Storage to the data lake.
