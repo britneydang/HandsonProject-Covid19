@@ -62,4 +62,7 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
     - Drag COPY data in -> in the properties below, General: update name, timeout, Source: select original file, Sink: select target file, Mapping: no custom mapping needed if I simply move the whole file from 1 location to another. If the IF CONDITION is true, the COPY activity will be called. If the IF CONDITION is false, the COPY activity will not be called and I can set up an email sending out for error messages.
     - Drag VALIDATION in, in properties: update name (name:" Check if file exists"), select original dataset, edit timeout (check if file is arrived within ... hour, otherwise it will fail), sleep (how often do I want to check the file), minimum size. Make GET METADATA dependent on VALIDATION by connecting the 2 activities. GET METADATA will only run if the VALIDATION succeeds. DEBUG.
 ![image](https://user-images.githubusercontent.com/110323703/207456388-d76fa77d-68ee-425c-b86f-59facdea0234.png)
+    - Delte the source file on successful copy (acing like a move, but ADF doesnt have MOVE activity): Add a DELETE activity after the COPY activity. Under properties, select original dataset, unable logging (enable if I need to keep track a list of deleted files), connect them.
+![image](https://user-images.githubusercontent.com/110323703/207461737-7b1621c0-b903-4f83-9e6d-4dff23ae3302.png)
+
 
