@@ -55,8 +55,8 @@ In order to create a new table, I need to change Firewall settings, add my own I
 ![image](https://user-images.githubusercontent.com/110323703/207411453-17c76dc5-e3a4-4551-bf5c-488e603a4f55.png)
   - Create 2 Datasets -> ADF -> Author -> Dataset -> New Dataset -> choose Azure Blob storage (DelimitedText) / Azure Data Lake Storage Gen2 -> set properties: set file path, first row as header, NONE import schema -> OK -> Compression type: NONE / NONE (if it is a zip file, can select gzip), Column delimiter: tab / tab. PUBLISH ALL -> publish.
   - Create ADF pipeline: ADF -> new pipeline -> add info -> start to draw a flow in the blank area  
-     - Drag COPY data in -> in the properties below, General: update name, timeout, Source: select original file, Sink: select target file, Mapping: no custom mapping needed if I simply move the whole file from 1 location to another.
-![image](https://user-images.githubusercontent.com/110323703/207431733-dc6dbd63-20bb-4ede-851c-2ced171207c2.png)
-     - Click Validate ALL -> see no error -> DEBUG -> after succeeded -> PUBLISH ALL to save the pipeline
-
-
+    - Click Validate ALL -> see no error -> DEBUG -> after succeeded -> PUBLISH ALL to save the pipeline
+    - Control Flow Activities: Drag GET METADATA, in properties: update name, select original dataset, Field list: add a specific column names as needed for IF conditon (filter). Drag IF CONDITION in, connect GET METADATA to it, in the properties below, General: update name, Activities: Add dynamic content, use the pipeline expression builder. The example below mean: if the chosen column "Count" equals to 13, then it is true. 
+    ![image](https://user-images.githubusercontent.com/110323703/207449393-95b9a356-94aa-4333-82d6-70c95283bfdb.png)
+    - Drag COPY data in -> in the properties below, General: update name, timeout, Source: select original file, Sink: select target file, Mapping: no custom mapping needed if I simply move the whole file from 1 location to another. If the IF CONDITION is true, the COPY activity will run.
+    - Drag VALIDATION in, in properties: update name (name:" Check if file exists"), select original dataset, edit timeout (check if file is arrived within ... hour, otherwise it will fail), sleep (how often do I want to check the file), minimum size. Make GET METADATA dependent on VALIDATION by connecting the 2 activities. GET METADATA will only run if the VALIDATION succeeds.
