@@ -51,4 +51,12 @@ In order to create a new table, I need to change Firewall settings, add my own I
 ![image](https://user-images.githubusercontent.com/110323703/207225866-bcf7ec29-0af1-45ce-9be0-b6a5dd5f04a7.png)
   - Create file container and upload the file into the Blob Storage Account. Go to previously created Storage Account -> Storage Browser -> Blob container -> Add Container -> private -> create -> click on newly created container and select data set #2 -> upload.
   - Create container on the data lake storage. Go to previously created Data Lake Storage Account -> Storage Browser -> Blob container -> Add Container -> name "raw". 
-  - Create Linked Service: Go to ADF -> Manage -> Linked Service -> New -> choose Azure Blob storage -> 
+  - Create 2 Linked Services: Go to ADF -> Manage -> Linked Service -> New -> choose Azure Blob storage or Azure Data Lake Storage Gen2 -> add info -> create
+![image](https://user-images.githubusercontent.com/110323703/207411453-17c76dc5-e3a4-4551-bf5c-488e603a4f55.png)
+  - Create 2 Datasets -> ADF -> Author -> Dataset -> New Dataset -> choose Azure Blob storage (DelimitedText) / Azure Data Lake Storage Gen2 -> set properties: set file path, first row as header, NONE import schema -> OK -> Compression type: NONE / NONE (if it is a zip file, can select gzip), Column delimiter: tab / tab. PUBLISH ALL -> publish.
+  - Create ADF pipeline: ADF -> new pipeline -> add info -> start to draw a flow in the blank area  
+     - Drag COPY data in -> in the properties below, General: update name, timeout, Source: select original file, Sink: select target file, Mapping: no custom mapping needed if I simply move the whole file from 1 location to another.
+![image](https://user-images.githubusercontent.com/110323703/207431733-dc6dbd63-20bb-4ede-851c-2ced171207c2.png)
+     - Click Validate ALL -> see no error -> DEBUG -> after succeeded -> PUBLISH ALL to save the pipeline
+
+
