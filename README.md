@@ -25,6 +25,10 @@ My steps:
 ![image](https://user-images.githubusercontent.com/110323703/207212129-9b1dd4a4-38dd-44d3-8a90-3c63199c5ea8.png)
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourceGroups/COVID19-data-BritneyD/providers/Microsoft.DataFactory/factories/COVID19-reporting-ADF-BritneyD/overview
 
-- Create a Storage Account: Create a resource -> search Storage Account. When deployment is completed, Go to Resource
+- Create a Storage Account: Create a resource -> search Storage Account, leave everything default for now except Replication = Locally-Redundant Storage. When deployment is completed, Go to Resource
 ![image](https://user-images.githubusercontent.com/110323703/207213881-d462b69f-e6da-41ec-beee-9aadd327cae5.png)
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourcegroups/COVID19-data-BritneyD/providers/Microsoft.Storage/storageAccounts/covid19reportingbritneyd/overview
+
+- Create an Azure Data Lake Gen2: Create a resource -> search Storage Account, Replication = Locally-Redundant Storage, turn off Soft Delete, enable Data Lake Storage Gen 2 in Advanced (this feature is the only difference compared to other storage account).
+![image](https://user-images.githubusercontent.com/110323703/207215273-c5b51ccd-39fc-4a78-b38c-1189d549e373.png)
+https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourcegroups/COVID19-data-BritneyD/providers/Microsoft.Storage/storageAccounts/covid19datalakebritneyd/overview
