@@ -18,3 +18,10 @@ Technologies:
 - Transformation tools: Data Flows (simple transformation, code-free), HDInsight (complex, code-required, Hive/Pig), DataBricks(complex, code-required, Spark/Python).
 - Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2 (can add the big data solutions like Hadoop, Synapse Analytics), Azure SQL Database for data warehouse
 - Reporting tool: PowerBI
+
+My steps:
+- Create an Azure account and log in https://portal.azure.com/#home.
+- Create Azure Data Factory resources via Azure portal: Create a resource -> Marketplace -> Integration -> DF. After create DF and deployment is completed, Go to Resources. Click on Launch studio.
+![image](https://user-images.githubusercontent.com/110323703/207212129-9b1dd4a4-38dd-44d3-8a90-3c63199c5ea8.png)
+
+- 
