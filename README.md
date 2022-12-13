@@ -1,7 +1,8 @@
-# Hands-on Project: Covid-19
+# Hands-on Project 1: Covid-19
+Description: This project is about creating everything from scratch using all technologies/tools that are availalbe in Microsoft Azure Data Factory.
 
 Data Resources:
-In this project, I will use the COVID-19 data from the EU Center for Disease Prevention and Control website (ECDC).
+Use COVID-19 data from the EU Center for Disease Prevention and Control website (ECDC).
 - ECDC Website for Covid-19 Data - https://www.ecdc.europa.eu/en/covid-19/data
 - Euro Stat Website for Population Data - https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/tps00010.tsv.gz
 
@@ -25,10 +26,15 @@ My steps:
 ![image](https://user-images.githubusercontent.com/110323703/207212129-9b1dd4a4-38dd-44d3-8a90-3c63199c5ea8.png)
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourceGroups/COVID19-data-BritneyD/providers/Microsoft.DataFactory/factories/COVID19-reporting-ADF-BritneyD/overview
 
-- Create a Storage Account: Create a resource -> search Storage Account, leave everything default for now except Replication = Locally-Redundant Storage. When deployment is completed, Go to Resource
+- Create a Storage Account: Create a resource -> search Storage Account, leave everything default for now, Replication = Locally-Redundant Storage. When deployment is completed, Go to Resource.
 ![image](https://user-images.githubusercontent.com/110323703/207213881-d462b69f-e6da-41ec-beee-9aadd327cae5.png)
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourcegroups/COVID19-data-BritneyD/providers/Microsoft.Storage/storageAccounts/covid19reportingbritneyd/overview
 
 - Create an Azure Data Lake Gen2: Create a resource -> search Storage Account, Replication = Locally-Redundant Storage, turn off Soft Delete, enable Data Lake Storage Gen 2 in Advanced (this feature is the only difference compared to other storage account).
 ![image](https://user-images.githubusercontent.com/110323703/207215273-c5b51ccd-39fc-4a78-b38c-1189d549e373.png)
 https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourcegroups/COVID19-data-BritneyD/providers/Microsoft.Storage/storageAccounts/covid19datalakebritneyd/overview
+
+- Create an Azure SQL Databse: Create a resource -> Databases -> SQL Databse, create new Server -> authentication method = SQL authentication and set admin: britney/password: BDang1991, Configure database to Basic for more affordable price per month, Connectivity method = public endpoint and allow Azure service access to this server, Replication = Locally-Redundant Storage. When deployment is completed, Go to Resource.
+![image](https://user-images.githubusercontent.com/110323703/207219231-25fdc375-2dac-4b34-b9f7-fba6e90dc911.png)
+https://portal.azure.com/#@britneydang111gmail.onmicrosoft.com/resource/subscriptions/111234fb-c6b9-407a-835e-3aa626721019/resourceGroups/COVID19-data-BritneyD/providers/Microsoft.Sql/servers/covid19serverbritneyd/databases/covid19databasebritneyd/overview
+
