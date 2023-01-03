@@ -67,4 +67,6 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
   - My pipeline is doing a copy of a file from a Blob storage to an Azure Data Lake and I expect the file in the Blob Storage to arrive once every day. When the file is picked up, go back and delete the file (this acts like a move). Now I need to decide which trigger type. 3 types: Schedule, Tumbling Window, Event. It can be Schedule because I am expecting the file to arrive every day at a certain time. It can be Event because I have the file deleting at the end of the processing and I want to process the next file as soon as it arrives. Create trigger in ADF: ADF -> Manage -> New trigger -> name "tr_ingest_population" -> Event
 ![image](https://user-images.githubusercontent.com/110323703/210422250-8f911026-f03d-44f0-a2e9-3c0155b7435f.png)
 After creating a trigger, I need to attach it to a pipeline. Go to the pipeline pl_ingest_population_dataset2 -> Add trigger -> New/Edit -> Select tr_ingest_population_dataset2 -> OK -> PUBLISH ALL. To test run the trigger, go to the Azure Storage Explorer to reupload the population_dataset2.tsv file, go to Monitor Trigger Runs to refresh and view. 
+![image](https://user-images.githubusercontent.com/110323703/210429361-d73d6cf3-4952-4027-8ede-8b51d4ba015c.png)
+
 
