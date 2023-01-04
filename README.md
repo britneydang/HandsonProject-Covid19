@@ -71,8 +71,16 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
 
 2. Data Ingestion from HTTP - data set #1
 - I will ingest the data sets from HTTP (https://www.ecdc.europa.eu/en/covid-19/data) to Azure Data Lake. For the purpose of keeping my project data unchanged, I have saved the a;; the ECDC data into my git hub. The URL Base will be github website instead of ECDC website.
-- ADF -> Manage -> New Linked Services -> Select HTTP -> Leave as default for integration runtime, and copy paste the URL into BASE URL, Authentication = Anonymous -> Test connection -> Create
-  - Create the Source dataset - HTTP dataset: Author -> Dataset -> New -> HTTP/csv -> 
+- ADF -> Manage -> New Linked Services -> Select HTTP -> Leave as default for integration runtime, and copy paste the URL into BASE URL= https://github.com/, Authentication = Anonymous -> Test connection -> Create
+  - Create the Source dataset - HTTP dataset: Author -> Dataset -> New -> HTTP/csv -> select Link Services and add Relative URL = britneydang/HandsonProject-Covid19/blob/main/cases_deaths.csv, First row as Header -> OK
+  - Create the Sink dataset: Author -> Dataset -> New -> Azure Data Lake Storage Gen2/csv, choose linked services, add file path and csv file name, Import schema NONE -> OK
+  - Create the Pipeline: Author -> New -> Drag and Drop to create the pipeline. Under section, in General tab, rename. In Source tab, select source dataset http. In Sink, select sink dataset datalake. Click DEBUG so the file from the URL will get copied to the data lake. After it succeeded. PUBLISH ALL.
+![image](https://user-images.githubusercontent.com/110323703/210641197-bba70602-ae45-4baf-9c36-16703f9fde55.png)
+  - To avoid creating many components, I want to use the same existing pipeline (pipeline already create for cases deaths dataset) to pass many different file names. ADF has an ability to do so in the form of parameters and variables. 
+    - Parameters are external values passed into pipelines, datasets or linked services. The value cannot be changed inside a pipeline.
+    - Variables are internal values set inside a pipeline. The value can be changed inside the pipeline using Set Variable or Append Variable Activity.
+
+
 
 
 
