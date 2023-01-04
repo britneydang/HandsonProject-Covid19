@@ -71,5 +71,6 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
 
 2. Data Ingestion from HTTP - data set #1
 - I will ingest the data sets from HTTP (https://www.ecdc.europa.eu/en/covid-19/data) to Azure Data Lake
+- ADF -> Manage -> New Linked Services -> Select HTTP -> Leave as default for integration runtime, and copy paste the URL into BASE URL
 
 
