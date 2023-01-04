@@ -69,4 +69,7 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
 After creating a trigger, I need to attach it to a pipeline. Go to the pipeline pl_ingest_population_dataset2 -> Add trigger -> New/Edit -> Select tr_ingest_population_dataset2 -> OK -> PUBLISH ALL. To test run the trigger, go to the Azure Storage Explorer to reupload the population_dataset2.tsv file, go to Monitor Trigger Runs to refresh and view. 
 ![image](https://user-images.githubusercontent.com/110323703/210429361-d73d6cf3-4952-4027-8ede-8b51d4ba015c.png)
 
+2. Data Ingestion from HTTP - data set #1
+- I will ingest the data sets from HTTP (https://www.ecdc.europa.eu/en/covid-19/data) to Azure Data Lake
+
 
