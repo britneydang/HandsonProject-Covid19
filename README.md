@@ -125,6 +125,7 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
     - sinkFileName: hospital_admissions.csv
 
 ![image](https://user-images.githubusercontent.com/110323703/210661594-e13adbca-fd6a-4dc1-af6b-40e2f6dfa666.png)
+
 ![image](https://user-images.githubusercontent.com/110323703/210663222-1b080e26-326c-4aaf-b39c-cfc9a9b96e78.png)
 
 
