@@ -70,7 +70,9 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
 ![image](https://user-images.githubusercontent.com/110323703/210429361-d73d6cf3-4952-4027-8ede-8b51d4ba015c.png)
 
 2. Data Ingestion from HTTP - data set #1
-- I will ingest the data sets from HTTP (https://www.ecdc.europa.eu/en/covid-19/data) to Azure Data Lake
-- ADF -> Manage -> New Linked Services -> Select HTTP -> Leave as default for integration runtime, and copy paste the URL into BASE URL
+- I will ingest the data sets from HTTP (https://www.ecdc.europa.eu/en/covid-19/data) to Azure Data Lake. For the purpose of keeping my project data unchanged, I have saved the a;; the ECDC data into my git hub. The URL Base will be github website instead of ECDC website.
+- ADF -> Manage -> New Linked Services -> Select HTTP -> Leave as default for integration runtime, and copy paste the URL into BASE URL, Authentication = Anonymous -> Test connection -> Create
+  - Create the Source dataset - HTTP dataset: Author -> Dataset -> New -> HTTP/csv -> 
+
 
 
