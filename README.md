@@ -119,7 +119,7 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
   - DEBUG. In pipeline run , it asks for the value, need to input a specific RelativeURL and FileName. In this case, they will be:
     - sourceRelativeURL: britneydang/HandsonProject-Covid19/blob/main/hospital_admissions.csv
     - sinkFileName: hospital_admissions.csv
-  - After succeeded, I will create a trigger to keep the data updated. In this case, I will use Schedule trigger because the file in the URL will always exist, ECDC website update their data anytime they want and I wont look at slices of data (I want to get the data at a certain point): Manage -> Triggers -> New -> add info -> Ok 
+  - ** Option A ** After succeeded, I will create a trigger to keep the data updated. In this case, I will use Schedule trigger because the file in the URL will always exist, ECDC website update their data anytime they want and I wont look at slices of data (I want to get the data at a certain point): Manage -> Triggers -> New -> add info -> Ok 
   - Need to attach trigger to the pipeline befor PUBLISH. Go to the pipeline -> Add trigger -> New/Edit -> Choose the newly created trigger-> Ok -> input the Value:
     - sourceRelativeURL: britneydang/HandsonProject-Covid19/blob/main/hospital_admissions.csv
     - sinkFileName: hospital_admissions.csv
@@ -127,6 +127,8 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
 ![image](https://user-images.githubusercontent.com/110323703/210661594-e13adbca-fd6a-4dc1-af6b-40e2f6dfa666.png)
 
 ![image](https://user-images.githubusercontent.com/110323703/210663222-1b080e26-326c-4aaf-b39c-cfc9a9b96e78.png)
-
+  - ** Option B ** Instead of creating a trigger to copy from sourceRelativeURL to sinkFileName for each dataset (I have total 4 datasets), I want to have a pipeline that gets information about the Source and the Sink from somewhere and then copies all the data required. Later on, I can invoke that one pipeline with one trigger. To do so, I can use LookUp and ForEach activities in ADF.
+    - LooKUp Activity: can retrieve a dataset from any of the Azure DF supported data sources. Its output can be used in a ForEach Activity if it's an array of attributes.
+    - ForEach Activity: get the information from the LookUp activity. ForEach activity will go through a list of file names or item names that I've got within a file  and then invoke the COPY Activity or any other Activity for that matter. In this case, I will create a JSON file for needed information (info about 4 datasets)
 
 
