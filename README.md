@@ -133,7 +133,17 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
     - sinkFileName: country_response.csv
   - ** Option B ** Instead of creating a trigger to copy from sourceRelativeURL to sinkFileName for each dataset (I have total 4 datasets), I want to have a pipeline that gets information about the Source and the Sink from somewhere and then copies all the data required. Later on, I can invoke that one pipeline with one trigger. To do so, I can use LookUp and ForEach activities in ADF.
     - LooKUp Activity: can retrieve a dataset from any of the Azure DF supported data sources. Its output can be used in a ForEach Activity if it's an array of attributes.
-    - ForEach Activity: get the information from the LookUp activity. ForEach activity will go through a list of file names or item names that I've got within a file  and then invoke the COPY Activity or any other Activity for that matter. In this case, I will create a JSON file for needed information (info about 4 datasets) name "ecdc_file_list.json" and I will upload the file into Azure Blob storage so ADF can read from it.
+    - ForEach Activity: get the information from the LookUp activity. ForEach activity will go through a list of file names or item names that I've got within a file  and then invoke the COPY Activity or any other Activity for that matter. In this case, I will create a JSON file for needed information (info about 4 datasets) name "ecdc_file_list.json" and I will upload the file into Azure Blob storage so ADF can read from it. If I have more datasets, I dont need to make any change to the ADF, I will only need to update the JSON file.
   - Azure Storage Explorer -> create new blob container name "configs" -> upload the JSON file
-  - ADF -> create new dataset -> Azure Blob storage/JSON -> make sure to select the JSON file for file path -> Ok -> PUBLISH
+  - ADF -> Author -> create new dataset -> Azure Blob storage/JSON -> make sure to select the JSON file for file path -> Linked service is the blob storage ls -> Ok -> this list is created. PUBLISH.
+  - ADF -> Author -> ecdc pipeline -> create Lookup activity by dragging it to the pipeline -> in Setting tab, select source dataset, uncheck First Row Only -> create ForEach activity and make it dependent on Lookup activity -> in Setting tab, in Items add dynamic content -> in Activity output, click newly created Lookup activity name + ".value" -> copy the existing COPY Data activity and put it inside the ForEach activity and delete the OG COPY Data activity -> Go to COPY Data activity, in tab Source, add dynamic content for Relative URL and BaseURL -> select under ForEach Iterator and add ".sourceRelativeURL", ".sourceBaseURL". In tab Sink, add dynamic content for FileName -> select under ForEach Iterator and add .sinkFileName. Click on VALIDATE. I need to link my Lookup activity to the JSON file: Author -> dataset -> choose correct file in file path. DEBUG without any input for parameters.
+  - Check if 4 dataset files are in the data lake in Azure Storage Explorer
+![image](https://user-images.githubusercontent.com/110323703/211281120-780cecf4-3834-483b-9a76-402c7b45ee1d.png)
+
+  - I need to create a trigger that will copy all of the data (4 datasets): Manage -> triggers -> type = Schedule, recurrent = ..., start trigger on creation. Then I need to attach the trigger to the pipeline: Author -> pipeline -> New/Edit -> select the corresponding pipeline -> Ok. Make sure that the new trigger's parameters tab is empty. PUBLISH ALL.
+![image](https://user-images.githubusercontent.com/110323703/211285816-e2caa779-5a33-496b-893a-7c0af790b36a.png)
+
+
+  
+
 
