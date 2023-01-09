@@ -127,8 +127,13 @@ After creating a trigger, I need to attach it to a pipeline. Go to the pipeline 
 ![image](https://user-images.githubusercontent.com/110323703/210661594-e13adbca-fd6a-4dc1-af6b-40e2f6dfa666.png)
 
 ![image](https://user-images.githubusercontent.com/110323703/210663222-1b080e26-326c-4aaf-b39c-cfc9a9b96e78.png)
+  - Parameterize Linked Services: I need to parameterize linked services in case the BASE URLs (website links) are different. ADF -> Manage -> Linked Services -> click on http -> remove old name Base URL, in Parameters add new "sourceBaseURL" -> click adding dynamic content and select newly added parameters -> Apply. Now I need to create a parameter in existing http dataset: Author -> datasets -> click ds http -> in parameters -> add new -> input BaseURL -> go to Connection tab, add dynamic content -> select BaseURL. I need to make a corresponding change to the pipeline: go to the ingest ecdc pipeline -> in Parameters, add new "sourceBaseURL". I need to pass that onto a source dataset: click the COPY activity, in Source tab, add dynamic content for BaseURL. Click DEBUG and enter info into parameters like below as example. After succeed, go to Azure Storage Explorer to see if the new file in in the data lake.
+    - sourceBaseURL: https://github.com/
+    - sourceRelativeURL: britneydang/HandsonProject-Covid19/blob/main/country_response.csv
+    - sinkFileName: country_response.csv
   - ** Option B ** Instead of creating a trigger to copy from sourceRelativeURL to sinkFileName for each dataset (I have total 4 datasets), I want to have a pipeline that gets information about the Source and the Sink from somewhere and then copies all the data required. Later on, I can invoke that one pipeline with one trigger. To do so, I can use LookUp and ForEach activities in ADF.
     - LooKUp Activity: can retrieve a dataset from any of the Azure DF supported data sources. Its output can be used in a ForEach Activity if it's an array of attributes.
-    - ForEach Activity: get the information from the LookUp activity. ForEach activity will go through a list of file names or item names that I've got within a file  and then invoke the COPY Activity or any other Activity for that matter. In this case, I will create a JSON file for needed information (info about 4 datasets)
-
+    - ForEach Activity: get the information from the LookUp activity. ForEach activity will go through a list of file names or item names that I've got within a file  and then invoke the COPY Activity or any other Activity for that matter. In this case, I will create a JSON file for needed information (info about 4 datasets) name "ecdc_file_list.json" and I will upload the file into Azure Blob storage so ADF can read from it.
+  - Azure Storage Explorer -> create new blob container name "configs" -> upload the JSON file
+  - ADF -> create new dataset -> Azure Blob storage/JSON -> make sure to select the JSON file for file path -> Ok -> PUBLISH
 
