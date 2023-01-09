@@ -142,6 +142,11 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
   - I need to create a trigger that will copy all of the data (4 datasets): Manage -> triggers -> type = Schedule, recurrent = ..., start trigger on creation. Then I need to attach the trigger to the pipeline: Author -> pipeline -> New/Edit -> select the corresponding pipeline -> Ok. Make sure that the new trigger's parameters tab is empty. PUBLISH ALL.
 ![image](https://user-images.githubusercontent.com/110323703/211285816-e2caa779-5a33-496b-893a-7c0af790b36a.png)
 
+3. Data Transformation - Data Flows
+- After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
+- Transform cases_deaths dataset:
+  - 
+
 
   
 
