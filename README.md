@@ -68,7 +68,7 @@ In order to create a new table, I need to change Firewall settings, add my own I
 IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will show an failed error.
     - Drag COPY data in -> in the properties below, General: update name, timeout, Source: select original file, Sink: select target file, Mapping: no custom mapping needed if I simply move the whole file from 1 location to another. If the IF CONDITION is true, the COPY activity will be called. If the IF CONDITION is false, the COPY activity will not be called and I can set up an email sending out for error messages.
     - Drag VALIDATION in, in properties: update name (name:" Check if file exists"), select original dataset, edit timeout (check if file is arrived within ... hour, otherwise it will fail), sleep (how often do I want to check the file), minimum size. Make GET METADATA dependent on VALIDATION by connecting the 2 activities. GET METADATA will only run if the VALIDATION succeeds. DEBUG.
-
+    
 ![image](https://user-images.githubusercontent.com/110323703/207456388-d76fa77d-68ee-425c-b86f-59facdea0234.png)
     - Delete the source file on successful copy (acting like a move, but ADF doesnt have MOVE activity): Add a DELETE activity after the COPY activity. Under properties, select original dataset, unable logging (enable if I need to keep track a list of deleted files), connect them. PUBLISH ALL.
 
@@ -143,8 +143,9 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
 ![image](https://user-images.githubusercontent.com/110323703/211285816-e2caa779-5a33-496b-893a-7c0af790b36a.png)
 
 3. Data Transformation - Data Flows
-- After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
-- Transform cases_deaths dataset:
+After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
+- Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting:
+  - 
 
 
   
