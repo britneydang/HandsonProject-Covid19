@@ -149,7 +149,7 @@ After ingesting data from various sources (ECDC data from website and population
 ![image](https://user-images.githubusercontent.com/110323703/211485728-df606f25-5b31-42a1-8991-23516a786261.png)
 
     - Change 1: Filter column continent = "Europe" and remove continent column
-    - Change 2: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits)
+    - Change 2: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). File name country_lookup.csv. Upload this lookup file into the storage account: Go to Storage Explorer -> ADLS Gen2 -> Blob Container -> create new folder "lookup" and upload the csv file.
     - Change 3: Use 2 columns indicator and daily_count to create 2 different columns cases_count and deaths_count
     - Change 4: Change column name from date into reported date
     - Change 5: Drop column rate_14_day
