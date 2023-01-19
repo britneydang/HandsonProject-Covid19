@@ -144,9 +144,16 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
 
 3. Data Transformation - Data Flows
 After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
-- Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting. The raw file is below
+- Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below are the original file and notes of transformations that I want to make:
 
 ![image](https://user-images.githubusercontent.com/110323703/211485728-df606f25-5b31-42a1-8991-23516a786261.png)
+
+    - Change 1: Filter column continent = "Europe" and remove continent column
+    - Change 2: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits)
+    - Change 3: Use 2 columns indicator and daily_count to create 2 different columns cases_count and deaths_count
+    - Change 4: Change column name from date into reported date
+    - Change 5: Drop column rate_14_day
+    - Keep columns country, population, source the same
 
 
 
