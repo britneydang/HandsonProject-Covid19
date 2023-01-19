@@ -144,16 +144,34 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
 
 3. Data Transformation - Data Flows
 After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
-- Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below are the original file and notes of transformations that I want to make:
+* Transform cases_deaths * dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below are the original file. 
 
 ![image](https://user-images.githubusercontent.com/110323703/211485728-df606f25-5b31-42a1-8991-23516a786261.png)
 
-    - Change 1: Filter column continent = "Europe" and remove continent column
-    - Change 2: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). File name country_lookup.csv. Upload this lookup file into the storage account: Go to Storage Explorer -> ADLS Gen2 -> Blob Container -> create new folder "lookup" and upload the csv file.
-    - Change 3: Use 2 columns indicator and daily_count to create 2 different columns cases_count and deaths_count
-    - Change 4: Change column name from date into reported date
-    - Change 5: Drop column rate_14_day
-    - Keep columns country, population, source the same
+Notes of transformations that I want to make:
+- Change #1: Filter column continent = "Europe" and remove continent column
+- Change #2: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). Keep the country_code 3 digits in there. File name country_lookup.csv. Upload this lookup file into the storage account: Go to Storage Explorer -> ADLS Gen2 -> Blob Container -> create new blob name "lookupsupportfile" and upload the csv file.
+- Change #3: Use 2 columns indicator and daily_count to pivot out 2 different columns cases_count and deaths_count
+- Change #4: Change column name from date into reported date
+- Change #5: Drop column rate_14_day
+- Keep columns country, population, source the same
+
+I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debug (Warning notes: Turn on/off the Dataflow DEBUG when it is not in use, if not it will be costly), leave as is AutoResolveIntegrationRuntime (in case I want a bigger cluster for my debug, I can create a new integration runtime) -> Data Flows -> new Mapping Data flow -> dataflow -> name dataflow -> Now I need to create a SOURCE. In a data flow, which is called stream, is started with at least one source and ended with a sink. ALL Tranformations will be performed based on the list of changes above:
+- Source Transformation: Need to create a source -> click Add Source. Under Source settings tab -> add Stream name, Source type = Dataset -> add New -> ADLS Gen2 -> DelimitedText -> name df, select corresponding linked service, add file path, select cases_deaths.csv file, select First Row as header and From connection/store -> Ok. Test connection. Next is the Options:
+  - Allow schema drift: its useful when I expect my source data to change often. If there is a new column being added to the dataset, data flow will flow the new column through to the sink without me having to make any code changes.If I don't select, it will be the fixed schema that I have specified. 
+  - Infer drifted column types: For the new column or any changes being made to the source data, select this option if I want data flow to infer the column types. If I don't select, everything that being added or inferred will have type = string.
+  - Validate schema: if my current data doesn't satisfy the dataset schema specifed, it will fail.
+  - Other - Skip line count: if I specify number of records to skip within the file, then it will do it.
+  - Other - Sampling: Enable sampling for testing purpose
+- Debug Settings -> select sample file and row limit, select file path -> save. Under Source Options tab, After completion, I can choose no action or delete the source file after completion. Under Projection tab, I can manually edit the data type or click the Detect data type. Under Optimize tab, use the current for now. View inspect for all data types. Under Data preview, refresh to view all data. 
+- Filter Transformation: Need to filter continent into only Europe (#1)
+- Select Transformation: Need to delete column continent (#1), change column name reported_date (#4), and delete column rate_14_day (#5)
+- Pivot Transformation: Need to pivot to find out how many confirmed covid cases (cases_count) and how many covid death cases (deaths_count) per reported_day. Pivot key is the column indicator, the column being pivoted is the daily_count, and the rest of columns would form part of the group by column. Aggregate function SUM will be used to add daily_count.
+- Lookup Transformation: Need to create a new dataset under Datasets for the lookup file. Drag the country_lookup into Add Source
+- Sink Transformation: It's an Output. Create a new blob container in ADLS Gen2 in Storage Explorer name "processed". Settings tab -> Output to a single file -> trigger now
+
+    
+    
 
 
 
