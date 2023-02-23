@@ -164,11 +164,31 @@ I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debu
   - Other - Skip line count: if I specify number of records to skip within the file, then it will do it.
   - Other - Sampling: Enable sampling randomly for testing purpose
 - Debug Settings -> select sample file and row limit, select file path -> save. Under Source Options tab, After completion, I can choose no action or delete the source file after completion. Under Projection tab, I can manually edit the data type or click the Detect data type. Under Optimize tab, use the current for now. View inspect for all data types. Under Data preview, refresh to view all data. 
-- Filter Transformation: Need to filter continent into only Europe (#1)
-- Select Transformation: Need to delete column continent (#1), change column name reported_date (#4), and delete column rate_14_day (#5)
+
+![image](https://user-images.githubusercontent.com/110323703/220839185-ba3be12e-5a72-4124-9bcc-a73494bf6964.png)
+- Filter Transformation: Need to filter continent into only Europe (#1)-> click on the plus for a list of transformations -> Filter -> Open Expression builder -> input expression
+
+![image](https://user-images.githubusercontent.com/110323703/220840564-a660d67b-b2f4-42f2-8458-315cc00baec8.png)
+![image](https://user-images.githubusercontent.com/110323703/220840737-b17d557f-4624-4012-8417-fa680d1ec24f.png)
+- Select Transformation: Need to delete column continent (#1), change column name reported_date (#4), and delete column rate_14_day (#5) -> plus, Select transformation -> move down to the mapping, for #1 and #5, need to delete the continent and rate_14_day; for #4, rename in Name as column.
+
+![image](https://user-images.githubusercontent.com/110323703/220845266-4792e57f-1ac3-44b0-b7f2-574dc2866ec2.png)
 - Pivot Transformation: Need to pivot to find out how many confirmed covid cases (cases_count) and how many covid death cases (deaths_count) per reported_day. Pivot key is the column indicator, the column being pivoted is the daily_count, and the rest of columns would form part of the group by column. Aggregate function SUM will be used to add daily_count.
-- Lookup Transformation: Need to create a new dataset under Datasets for the lookup file. Drag the country_lookup into Add Source
-- Sink Transformation: It's an Output. Create a new blob container in ADLS Gen2 in Storage Explorer name "processed". Settings tab -> Output to a single file -> trigger now
+
+![image](https://user-images.githubusercontent.com/110323703/220847370-d1b2693c-c6ba-4bf7-a567-9866ae7befd3.png)
+![image](https://user-images.githubusercontent.com/110323703/220848034-5b7f3d2c-87db-4e71-bb76-cfdbb6bfae0a.png)
+![image](https://user-images.githubusercontent.com/110323703/220849608-58fb86cd-98b6-45a5-821c-17fea9249ff9.png)
+![image](https://user-images.githubusercontent.com/110323703/220849931-d049e54a-a83f-4617-a2a8-4e8f71adf482.png)
+- Lookup Transformation: Need to create a new dataset under Datasets for the lookup file. New datasets -> ADLS 2 -> Delimited -> Browse file path -> ok -> Add Source, select the lookup file -> plus, Lookup transformation. This is acting like a left join (PivotCounts LEFT JOIN CountryLookup) -> need a select transformation right after to delete duplicate columns and rearrange columns 
+
+![image](https://user-images.githubusercontent.com/110323703/220855071-5eeef9eb-3669-4502-8cb7-a0a1611ceaa6.png)
+- Sink Transformation: It's an Output. Create a new blob container in ADLS Gen2 in Storage Explorer name "processed". Back to ADF, under Sink tab, create new dataset -> ADLS 2, delimited -> select none schema. PUBLISH ALL.
+
+![image](https://user-images.githubusercontent.com/110323703/220857219-b56c0ae3-9c99-49c9-8fb7-11cec77ee02d.png)
+- Create a new ADF pipeline that contains the newly created stream so I can execute the data flow. After finish, turn off the Data flow debug. PUBLISH. Trigger now -> go to Monitor to view it.
+
+![image](https://user-images.githubusercontent.com/110323703/220858906-0b43ff6e-260a-4a7b-91f6-6e41513939bc.png)
+![image](https://user-images.githubusercontent.com/110323703/220858630-efc3f474-81c4-4e66-a7fb-593f98887289.png)
 
     
     
