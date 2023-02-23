@@ -157,12 +157,12 @@ Notes of transformations that I want to make:
 - Keep columns country, population, source the same
 
 I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debug (Warning notes: Turn on/off the Dataflow DEBUG when it is not in use, if not it will be costly), leave as is AutoResolveIntegrationRuntime (in case I want a bigger cluster for my debug, I can create a new integration runtime) -> Data Flows -> new Mapping Data flow -> dataflow -> name dataflow -> Now I need to create a SOURCE. In a data flow, which is called stream, is started with at least one source and ended with a sink. ALL Tranformations will be performed based on the list of changes above:
-- Source Transformation: Need to create a source -> click Add Source. Under Source settings tab -> add Stream name, Source type = Dataset -> add New -> ADLS Gen2 -> DelimitedText -> name df, select corresponding linked service, add file path, select cases_deaths.csv file, select First Row as header and From connection/store -> Ok. Test connection. Next is the Options:
+- Source Transformation: Need to create a source -> click Add Source. Under Source settings tab -> add Stream name, Source type = Dataset -> add New dataset -> ADLS Gen2 -> DelimitedText -> name df, select corresponding data lake linked service, add file path, select cases_deaths.csv file, select First Row as header and From connection/store -> Ok. Test connection. Next is the Options:
   - Allow schema drift: its useful when I expect my source data to change often. If there is a new column being added to the dataset, data flow will flow the new column through to the sink without me having to make any code changes.If I don't select, it will be the fixed schema that I have specified. 
   - Infer drifted column types: For the new column or any changes being made to the source data, select this option if I want data flow to infer the column types. If I don't select, everything that being added or inferred will have type = string.
   - Validate schema: if my current data doesn't satisfy the dataset schema specifed, it will fail.
   - Other - Skip line count: if I specify number of records to skip within the file, then it will do it.
-  - Other - Sampling: Enable sampling for testing purpose
+  - Other - Sampling: Enable sampling randomly for testing purpose
 - Debug Settings -> select sample file and row limit, select file path -> save. Under Source Options tab, After completion, I can choose no action or delete the source file after completion. Under Projection tab, I can manually edit the data type or click the Detect data type. Under Optimize tab, use the current for now. View inspect for all data types. Under Data preview, refresh to view all data. 
 - Filter Transformation: Need to filter continent into only Europe (#1)
 - Select Transformation: Need to delete column continent (#1), change column name reported_date (#4), and delete column rate_14_day (#5)
