@@ -189,6 +189,7 @@ I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debu
 
 ![image](https://user-images.githubusercontent.com/110323703/220858906-0b43ff6e-260a-4a7b-91f6-6e41513939bc.png)
 ![image](https://user-images.githubusercontent.com/110323703/220858630-efc3f474-81c4-4e66-a7fb-593f98887289.png)
+![image](https://user-images.githubusercontent.com/110323703/220860535-24966d35-19e4-409d-aa36-1c6326a4090c.png)
 
     
     
