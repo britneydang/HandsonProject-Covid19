@@ -144,7 +144,7 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
 
 3. Data Transformation - Data Flows
 After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
-* Transform cases_deaths * dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.cvs in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below are the original file. 
+- Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.csv in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below is how the original file looks like. 
 
 ![image](https://user-images.githubusercontent.com/110323703/211485728-df606f25-5b31-42a1-8991-23516a786261.png)
 
@@ -190,6 +190,17 @@ I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debu
 ![image](https://user-images.githubusercontent.com/110323703/220858906-0b43ff6e-260a-4a7b-91f6-6e41513939bc.png)
 ![image](https://user-images.githubusercontent.com/110323703/220858630-efc3f474-81c4-4e66-a7fb-593f98887289.png)
 ![image](https://user-images.githubusercontent.com/110323703/220860535-24966d35-19e4-409d-aa36-1c6326a4090c.png)
+
+- Transform hospital_admission dataset: : Go to Azure Storage Explorer -> datalake -> open the new file hospital_admissions.csv in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below is how the original file looks like.
+
+![image](https://user-images.githubusercontent.com/110323703/227808653-8ea0c033-a6a2-4d73-8e9d-2bd9b1eaa959.png)
+- Notes of transformations that I want to make:
+Change #1: Drop URL column
+Change #2: Split into 2 different files: one is for Daily and one is for Weekly 
+Change #3: In Daily file, create new columns for Daily Hospital Occupancy and Daily ICU Occupancy. In Weekly file, create new columns for Weekly Hospital Occupancy and Weekly ICU Occupancy.
+Change #4: Lookup to another table dim_date to get the date info for year_week column
+Change #5: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). Keep the country_code 3 digits in there. File name country_lookup.csv.
+Change #6: Use Indicator column and Value column to derive two columns hospital_occupancy_count and icu_occupancy_count.
 
     
     
