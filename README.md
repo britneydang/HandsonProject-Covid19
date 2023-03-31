@@ -1,5 +1,5 @@
-# Hands-on Project 1: Covid-19
-Description: This project is about creating everything from scratch using all technologies/tools that are availalbe in Microsoft Azure Data Factory.
+# Hands-on Project:
+Description: This project is about creating everything from scratch using all technologies/tools that are availalbe in Microsoft Azure Data Factory using Covid-19 datasets
 
 Data Resources:
 Use COVID-19 data from the EU Center for Disease Prevention and Control website (ECDC).
