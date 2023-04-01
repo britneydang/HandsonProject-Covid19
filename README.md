@@ -142,7 +142,7 @@ IF FALSE, edit -> Drag WEB, input for properties, can use a dummy URL so it will
   - I need to create a trigger that will copy all of the data (4 datasets): Manage -> triggers -> type = Schedule, recurrent = ..., start trigger on creation. Then I need to attach the trigger to the pipeline: Author -> pipeline -> New/Edit -> select the corresponding pipeline -> Ok. Make sure that the new trigger's parameters tab is empty. PUBLISH ALL.
 ![image](https://user-images.githubusercontent.com/110323703/211285816-e2caa779-5a33-496b-893a-7c0af790b36a.png)
 
-3. Data Transformation - Data Flows
+3. Data Transformation - Data Flows in Azure Data Factory
 After ingesting data from various sources (ECDC data from website and population data from the Blob Storage) into the Data Lake, now I need to transform the data by using Data Flow (in ADF). There are many types of transformation that can be created with a data flow: source transformation, filter transformation, select transformation, pivot transformation, lookup transformation, sink transformation.
 - Transform cases_deaths dataset: Go to Azure Storage Explorer -> datalake -> open the new file cases_deaths.csv in excel -> I need to decide how I want to transform the original data depending on the need of reporting. Below is how the original file looks like. 
 
@@ -252,8 +252,14 @@ Publish ALL. The data flow is sucessfully created. Now I need to execute the dat
 ![image](https://user-images.githubusercontent.com/110323703/229271171-f33eb064-1ec7-4845-b1df-2d0deeeca9de.png)
 ![image](https://user-images.githubusercontent.com/110323703/229271825-aed2b9a7-7575-435e-a2a1-de0d2dc3fd6d.png)
 
-4. HDInsight Activity
-- update file location and make sure they are in correct directory/folder in Azure Storage Explorer and ADF (datasets file path)
-- 
+4. Transformation - HDInsight Activity
+- Update file location and make sure they are in correct directory/folder in Azure Storage Explorer and ADF (datasets file path)
+- I want to transform the testing file that I ingested into the data lake from ECDC using HDInsight
+- Create HDInsight Cluster
+  - Create managed identity: Azure Portal -> create new resource -> User Assigned Managed Identity -> Create -> 
+  - Grant access in data lake: Azure Portal -> Dashboard -> datalake storage account -> Access Control -> Add Role Assignment -> Storage Blob Data Owner -> 
+  - Create HDInsight Cluster:  Azure Portal -> create new resource -> azure HDInsight -> Create -> Register ->
+  - 
+- C
 
 
