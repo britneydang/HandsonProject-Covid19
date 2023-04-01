@@ -196,7 +196,7 @@ I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debu
 ![image](https://user-images.githubusercontent.com/110323703/227808653-8ea0c033-a6a2-4d73-8e9d-2bd9b1eaa959.png)
 - Notes of transformations that I want to make:
 Change #1: Drop URL column, rename date to report_date, rename year_week to reported_year_week
-Change #2: Split into 2 different files: one is for Daily and one is for Weekly 
+Change #2: Split into 2 different files: one is for Daily and one is for Weekly base on the indicator column
 Change #3: In Daily file, create new columns for Daily Hospital Occupancy and Daily ICU Occupancy. In Weekly file, create new columns for Weekly Hospital Occupancy and Weekly ICU Occupancy.
 Change #4: Lookup to another table dim_date to get the date info for year_week column
 Change #5: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). Keep the country_code 3 digits in there. File name country_lookup.csv. Remove continent
@@ -213,11 +213,43 @@ ALL Tranformations will be performed based on the list of changes above:
 
 ![image](https://user-images.githubusercontent.com/110323703/229267026-f20b5967-60b8-41a1-8980-9d612019453b.png)
 - Add Select Transformation to remove continent (#5)
-- 
+- Now I will split the data into 2 separate streams: one for Daily and one for Weekly (#2) indicator is the condition to split. Use Conditional Split Transformation: 
 
-    
-    
+![image](https://user-images.githubusercontent.com/110323703/229267341-a5dec3f6-5276-4870-9cd4-789c956f761c.png)
+![image](https://user-images.githubusercontent.com/110323703/229267319-175f5272-4514-435f-8fef-52a61b388b37.png)
+- Create another Source Transformation for the dim_date lookup file. Given the dim_date table (#3, #4). Then use Derived Column Transformation to create a new column ecdc_year_week which has a required format YYYY-W##. Then to add the week_start_date and week_end_date into Weekly file, I need to create an Aggregate Transformation
 
+![image](https://user-images.githubusercontent.com/110323703/229267897-6c6fd08d-1336-4420-a077-9b2ea9505469.png)
+![image](https://user-images.githubusercontent.com/110323703/229268133-cf4b1833-2c29-42a0-8a38-b3687b05ccd3.png)
+![image](https://user-images.githubusercontent.com/110323703/229268181-9ec68f97-5a34-4bd9-96d2-0824ca2a2bea.png)
+- I need to join the DimDate data into the main stream. Use Join Transformation: 
+
+![image](https://user-images.githubusercontent.com/110323703/229268512-34220c5f-3997-4c49-9ac6-468a33a61d4f.png)
+![image](https://user-images.githubusercontent.com/110323703/229268614-2bc6b053-f266-41e7-a9e5-a700a73e3ed7.png)
+- Use Pivot Transformation to on Daily and Weekly to get the hospital_occupancy_count/icu_occupancy_count from the indicator and the value field (#6)
+    
+![image](https://user-images.githubusercontent.com/110323703/229269141-a4acc86f-dc90-4e1a-8fd8-9a38f6e2d6ad.png)
+![image](https://user-images.githubusercontent.com/110323703/229269232-af1fa3e1-1136-40e3-883c-c027c14841eb.png)
+![image](https://user-images.githubusercontent.com/110323703/229269292-bb6fc66d-bf44-444d-837e-07f49d9bdc9a.png)
+![image](https://user-images.githubusercontent.com/110323703/229269443-b310210f-2055-4f0d-9031-624feb01202d.png)
+![image](https://user-images.githubusercontent.com/110323703/229269457-bcc240df-d43a-43da-aea3-b13299b3c7c3.png)
+![image](https://user-images.githubusercontent.com/110323703/229269500-7b765474-dff4-463b-8d70-82b04ccd783f.png)
+![image](https://user-images.githubusercontent.com/110323703/229269524-c7d93839-305d-4c49-a61a-084e7c96c767.png)
+- Use Sort Tranformation for both Weekly and Daily
+
+![image](https://user-images.githubusercontent.com/110323703/229269714-054c1054-83ec-4e1e-a0dd-495a6d36d0bf.png)
+![image](https://user-images.githubusercontent.com/110323703/229269747-586a3848-b536-4840-9c2d-13a9ca5c1a5a.png)
+- Select and Sink Transformation: 
+
+![image](https://user-images.githubusercontent.com/110323703/229270484-4e257732-6b10-4e94-b208-46994f4cf493.png)
+![image](https://user-images.githubusercontent.com/110323703/229270603-4d006dde-5113-4c49-aeaf-b4a62b586e8a.png)
+
+Publish ALL. The data flow is sucessfully created. Now I need to execute the dataflow from a pipeline
+- Create a pipeline -> Publish -> Trigger now. To check on the end result file, go to Azure Storage Explorer ADLS Gen2
+
+![image](https://user-images.githubusercontent.com/110323703/229270829-a56b1761-b0e0-45f7-9675-9bd6b40ccc7e.png)
+![image](https://user-images.githubusercontent.com/110323703/229271155-ea7336d1-3354-420c-93c9-ec99a8878fb2.png)
+![image](https://user-images.githubusercontent.com/110323703/229271171-f33eb064-1ec7-4845-b1df-2d0deeeca9de.png)
 
 
   
