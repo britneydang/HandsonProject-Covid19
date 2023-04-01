@@ -195,12 +195,25 @@ I will start to create a data flow: ADF -> Author -> click turn on Dataflow Debu
 
 ![image](https://user-images.githubusercontent.com/110323703/227808653-8ea0c033-a6a2-4d73-8e9d-2bd9b1eaa959.png)
 - Notes of transformations that I want to make:
-Change #1: Drop URL column
+Change #1: Drop URL column, rename date to report_date, rename year_week to reported_year_week
 Change #2: Split into 2 different files: one is for Daily and one is for Weekly 
 Change #3: In Daily file, create new columns for Daily Hospital Occupancy and Daily ICU Occupancy. In Weekly file, create new columns for Weekly Hospital Occupancy and Weekly ICU Occupancy.
 Change #4: Lookup to another table dim_date to get the date info for year_week column
-Change #5: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). Keep the country_code 3 digits in there. File name country_lookup.csv.
+Change #5: Make standard for column country_code into 2 digits across all of the files (For the country_code that has 3 digits, use an external file with lookup function to lookup for its corresponding 2 digits). Keep the country_code 3 digits in there. File name country_lookup.csv. Remove continent
 Change #6: Use Indicator column and Value column to derive two columns hospital_occupancy_count and icu_occupancy_count.
+
+ALL Tranformations will be performed based on the list of changes above:
+- Create Source Transformation
+
+![image](https://user-images.githubusercontent.com/110323703/229266846-3e51a393-685a-4a48-82f0-b3bba62cec2e.png)
+- Use Select Transformation to remove URL, rename date to report_date, rename year_week to reported_year_week (#1)
+
+![image](https://user-images.githubusercontent.com/110323703/229266905-4c0583f2-38c6-41e5-8b7e-584a8b83a0f4.png)
+- Use Lookup Transformation to look up on country dimension file to get 2 digits and 3 digits code and the population of the country (#5). Create another Source Transformation for the lookup file.
+
+![image](https://user-images.githubusercontent.com/110323703/229267026-f20b5967-60b8-41a1-8980-9d612019453b.png)
+- Add Select Transformation to remove continent (#5)
+- 
 
     
     
