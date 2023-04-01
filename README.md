@@ -245,11 +245,12 @@ ALL Tranformations will be performed based on the list of changes above:
 ![image](https://user-images.githubusercontent.com/110323703/229270603-4d006dde-5113-4c49-aeaf-b4a62b586e8a.png)
 
 Publish ALL. The data flow is sucessfully created. Now I need to execute the dataflow from a pipeline
-- Create a pipeline -> Publish -> Trigger now. To check on the end result file, go to Azure Storage Explorer ADLS Gen2
+- Create a pipeline -> Publish -> Trigger now. To check on the end result file, go to Azure Storage Explorer ADLS Gen2. If I want output in the same file for weekly and daily, I can go back into the Sink Transformation to make the data output into a single partition/single file and select clear the folder to remove existing files. Also update in the Sort Transformation for single partition
 
 ![image](https://user-images.githubusercontent.com/110323703/229270829-a56b1761-b0e0-45f7-9675-9bd6b40ccc7e.png)
 ![image](https://user-images.githubusercontent.com/110323703/229271155-ea7336d1-3354-420c-93c9-ec99a8878fb2.png)
 ![image](https://user-images.githubusercontent.com/110323703/229271171-f33eb064-1ec7-4845-b1df-2d0deeeca9de.png)
+![image](https://user-images.githubusercontent.com/110323703/229271825-aed2b9a7-7575-435e-a2a1-de0d2dc3fd6d.png)
 
 
   
