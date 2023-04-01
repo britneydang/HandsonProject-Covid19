@@ -1,5 +1,5 @@
 # Hands-on Project:
-Description: This project is about creating everything from scratch using all technologies/tools that are availalbe in Microsoft Azure Data Factory using Covid-19 datasets
+Description: This project is about creating everything from scratch using all technologies/tools that are available in Microsoft Azure Data Factory using Covid-19 datasets
 
 Data Resources:
 Use COVID-19 data from the EU Center for Disease Prevention and Control website (ECDC).
@@ -252,7 +252,8 @@ Publish ALL. The data flow is sucessfully created. Now I need to execute the dat
 ![image](https://user-images.githubusercontent.com/110323703/229271171-f33eb064-1ec7-4845-b1df-2d0deeeca9de.png)
 ![image](https://user-images.githubusercontent.com/110323703/229271825-aed2b9a7-7575-435e-a2a1-de0d2dc3fd6d.png)
 
-
-  
+4. HDInsight Activity
+- update file location and make sure they are in correct directory/folder in Azure Storage Explorer and ADF (datasets file path)
+- 
 
 
