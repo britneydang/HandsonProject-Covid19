@@ -255,6 +255,6 @@ Publish ALL. The data flow is sucessfully created. Now I need to execute the dat
 4. Copy Data to Azure SQL Database: after transformation, the transformed data is written back to the data lake, now I need to copy this data to Azure SQL database so it can be used for reporting.
 
 Copy Activity - Data Lake to SQL for cases_and_deaths data
-- Azure Portal -> Dashboard -> already created SQL database -> query editor -> log in britney/
+- Azure Portal -> Dashboard -> already created SQL database -> query editor -> log in britney/BDang1991 -> 
 
 
