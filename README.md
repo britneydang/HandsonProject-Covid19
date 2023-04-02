@@ -9,7 +9,7 @@ Use COVID-19 data from the EU Center for Disease Prevention and Control website 
 Solution Architect:
 - I will use the HTTP Connector within the ADF to get the COVID-19 data (data set #1) and (as a second connector) keep the Population data (data set #2) in an Azure storage account and ingest from there.
 - Both data sets will be ingested into the Azure Data Lake Storage Gen2.
-- I will use ADF to transform data. I will use a few different tools for the transformation: Data Flows (transformation tool) within Data Factory. For HDInsight, Azure DataBricks, Data Factory will be used as orchestration tool.
+- I will Data Flows (transformation tool) within Data Factory.
 - All transformed data will be moved to Azure Data Lake Storage Gen2 for Machine Learning use.
 - I also push the subset of the required data to the SQL database so it can be used for reporting.
 - Visualization report such as PowerBI can be built from this data.
@@ -252,14 +252,9 @@ Publish ALL. The data flow is sucessfully created. Now I need to execute the dat
 ![image](https://user-images.githubusercontent.com/110323703/229271171-f33eb064-1ec7-4845-b1df-2d0deeeca9de.png)
 ![image](https://user-images.githubusercontent.com/110323703/229271825-aed2b9a7-7575-435e-a2a1-de0d2dc3fd6d.png)
 
-4. Transformation - HDInsight Activity
-- Update file location and make sure they are in correct directory/folder in Azure Storage Explorer and ADF (datasets file path)
-- I want to transform the testing file that I ingested into the data lake from ECDC using HDInsight
-- Create HDInsight Cluster
-  - Create managed identity: Azure Portal -> create new resource -> User Assigned Managed Identity -> Create -> 
-  - Grant access in data lake: Azure Portal -> Dashboard -> datalake storage account -> Access Control -> Add Role Assignment -> Storage Blob Data Owner -> 
-  - Create HDInsight Cluster:  Azure Portal -> create new resource -> azure HDInsight -> Create -> Register ->
-  - 
-- C
+4. Copy Data to Azure SQL Database: after transformation, the transformed data is written back to the data lake, now I need to copy this data to Azure SQL database so it can be used for reporting.
+
+Copy Activity - Data Lake to SQL for cases_and_deaths data
+- Azure Portal -> Dashboard -> already created SQL database -> query editor -> log in britney/
 
 
