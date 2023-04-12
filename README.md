@@ -16,7 +16,7 @@ Solution Architect:
 
 Technologies:
 - Use Azure Data Factory for all data integration and orchestration.
-- Transformation tools: Data Flows (simple transformation, code-free), HDInsight (complex, code-required, Hive/Pig), DataBricks(complex, code-required, Spark/Python).
+- Transformation tools: Data Flows (simple transformation, code-free)
 - Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2 (can add the big data solutions like Hadoop, Synapse Analytics), Azure SQL Database for data warehouse
 - Reporting tool: PowerBI
 
@@ -255,9 +255,14 @@ Publish ALL. The data flow is sucessfully created. Now I need to execute the dat
 4. Copy Data to Azure SQL Database: after transformation, the transformed data is written back to the data lake, now I need to copy this data to Azure SQL database so it can be used for reporting.
 
 Copy Activity - Data Lake to SQL for cases_and_deaths data
-- Create SQL tables: Azure Portal -> Dashboard -> already created SQL database -> query editor -> log in britney/BDang1991 -> add SQL script that contains create table statements for 2 datasets.
+- Create SQL tables: Azure Portal -> Dashboard -> select the already created SQL database -> query editor -> log in britney/BDang1991 -> add SQL script that contains create table statements for 2 datasets.
 
 ![image](https://user-images.githubusercontent.com/110323703/229334346-98093f8e-3afa-46fc-b58e-f4c9f70b7160.png)
-- Create pipeline: ADF -> new pipeline -> select Source dataset: ds_processed_cases_and_deaths -> Sink: New, Azure SQL Database, New Linked Services, Sink dataset newly created name ds_sqlDB_cases_and_deaths
+- Create pipeline: ADF -> new pipeline name pl_sql_cases_and_deaths_data -> select Source dataset: ds_processed_cases_and_deaths -> Sink: New, Azure SQL Database, New Linked Services, Sink dataset newly created name ds_sqlDB_cases_and_deaths
 ![image](https://user-images.githubusercontent.com/110323703/229334772-ea2d6ec0-a5a3-4462-af67-65fb60b1db46.png)
+- Click on COPY activity, edit Source and Sink. In Sink, pre-copy script type in TRUNCATE TABLE [table name] (because I dont want duplicate data, so I need to empty the old data before new data load into) -> DEBUG to run the pipeline -> after pipeline succeeded, go into SQL editor in Azure Portal to check on the new table result.
+
+![image](https://user-images.githubusercontent.com/110323703/231322231-7d51af6d-20d8-45e3-af07-811ea8be4df3.png)
+
+Copy Activity - Data Lake to SQL hospital_admissions data: do similar steps as above.
 
