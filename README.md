@@ -280,8 +280,11 @@ Data Factory Capability:
 Organize resources into folders
 
 ![image](https://user-images.githubusercontent.com/110323703/233533888-f76c5297-a24c-4eae-a7eb-84f951f83f6b.png)
+
 Data Orchestration - Parent Pipeline: Create a parent pipeline which will execute the ingestion and transformation pipelines, one after the other for the population data. Then create the trigger to execute the pipeline as soon as the file arrives in the Azure storage account. 
 - Create a new pipeline -> drag Execute Pipeline activity in (1st) -> add name and in Settings tab, select invoked pipeline (pipeline that need to be run first). There are options to add condition if the pipeline success, or fail, or complete, or skipped  -> drag another Execute Pipeline activity (2nd) -> add name and in Settings tab, select invoked pipeline (pipeline that is dependent on the result of 1st pipeline) -> connect 2 pipelines  
 - Now need to create a trigger for the Parent Pipeline -> Manage -> Triggers -> new -> select event, storage aacount name, container name, add file name in Blob path begins with (new file coming in) -> Event: Blob created, activated -> Created trigger -> Go back to pipeline, select add trigger -> new/edit -> PUBLISH
-- Put the new file into the storage account to check if the trigger executes: Azure storage explorer -> covid
+- Put the new file into the storage account to check if the trigger executes: Azure storage explorer -> covid19reportingbritneyd/blob containers/population, upload the new file in here -> go to ADF, monitor and I can see the Parent Pipeline run immediately -> go to trigger run to look at the detail runs
 
+Data Orchestration - Trigger Dependency: Create a tumbling window triggers to execute the pipelines, and also create dependencies between them. Tumbling window triggers are mainly used in cases dealing with slices of data. 
+- Create a trigger for the data ingestion first, then create trigger for each process and make them all dependent on the ingestion trigger, then create trigger for each SQLize and make them all dependent on the correspondent process trigger.
