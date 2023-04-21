@@ -266,7 +266,22 @@ Copy Activity - Data Lake to SQL for cases_and_deaths data
 
 Copy Activity - Data Lake to SQL hospital_admissions data: do similar steps as above. PUBLISH ALL
 
-5. Data Orchestration: Orchestraion requirements:
+5. Data Orchestration: 
+Orchestraion requirements:
 - Pipeline executions are fully automated. 
 - Pipelines run at regular intervals or on an event occurring 
-- 
+- Activities only run once the upstream dependency has been satisfied
+- Easier to monitor for execution progress and issues
+Data Factory Capability:
+- Dependency between activities inside a pipeline
+- Dependency between pipelines within a parent pipeline
+- Dependency between triggers (only tumbling window triggers)
+- Custom made solution (python, powershell, STPA... but not recommended)
+Organize resources into folders
+
+![image](https://user-images.githubusercontent.com/110323703/233533888-f76c5297-a24c-4eae-a7eb-84f951f83f6b.png)
+Data Orchestration - Parent Pipeline: Create a parent pipeline which will execute the ingestion and transformation pipelines, one after the other for the population data. Then create the trigger to execute the pipeline as soon as the file arrives in the Azure storage account. 
+- Create a new pipeline -> drag Execute Pipeline activity in (1st) -> add name and in Settings tab, select invoked pipeline (pipeline that need to be run first). There are options to add condition if the pipeline success, or fail, or complete, or skipped  -> drag another Execute Pipeline activity (2nd) -> add name and in Settings tab, select invoked pipeline (pipeline that is dependent on the result of 1st pipeline) -> connect 2 pipelines  
+- Now need to create a trigger for the Parent Pipeline -> Manage -> Triggers -> new -> select event, storage aacount name, container name, add file name in Blob path begins with (new file coming in) -> Event: Blob created, activated -> Created trigger -> Go back to pipeline, select add trigger -> new/edit -> PUBLISH
+- Put the new file into the storage account to check if the trigger executes: Azure storage explorer -> covid
+
