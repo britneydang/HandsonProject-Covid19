@@ -264,5 +264,9 @@ Copy Activity - Data Lake to SQL for cases_and_deaths data
 
 ![image](https://user-images.githubusercontent.com/110323703/231322231-7d51af6d-20d8-45e3-af07-811ea8be4df3.png)
 
-Copy Activity - Data Lake to SQL hospital_admissions data: do similar steps as above.
+Copy Activity - Data Lake to SQL hospital_admissions data: do similar steps as above. PUBLISH ALL
 
+5. Data Orchestration: Orchestraion requirements:
+- Pipeline executions are fully automated. 
+- Pipelines run at regular intervals or on an event occurring 
+- 
