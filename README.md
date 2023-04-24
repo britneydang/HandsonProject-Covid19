@@ -287,4 +287,14 @@ Data Orchestration - Parent Pipeline: Create a parent pipeline which will execut
 - Put the new file into the storage account to check if the trigger executes: Azure storage explorer -> covid19reportingbritneyd/blob containers/population, upload the new file in here -> go to ADF, monitor and I can see the Parent Pipeline run immediately -> go to trigger run to look at the detail runs
 
 Data Orchestration - Trigger Dependency: Create a tumbling window triggers to execute the pipelines, and also create dependencies between them. Tumbling window triggers are mainly used in cases dealing with slices of data. Create a trigger for the data ingestion first, then create trigger for each process and make them all dependent on the ingestion trigger, then create trigger for each SQLize and make them all dependent on the correspondent process trigger.
-- Create trigger: Manage -> 
+- Create 5 triggers: Manage -> 
+  - (1) new trigger 'tr_ingest_ecdc_data' -> select tumbling window -> set time midnight, run every 24 hrs 
+  - (2) create new trigger 'tr_process_cases_and_deaths_data' -> same setting except for Advance, make this dependent on trigger (1): Advance -> Add new dependencies 
+  - (3) create new trigger 'tr_process_hospital_admissions_data' -> same setting except for Advance, make this dependent on trigger (1) 
+  - (4) create new trigger 'tr_SQLize_cases_and_deaths_data' -> same setting except for Advance, make this dependent on trigger (2)
+  - (5) create new trigger 'tr_SQLize_hospital_admissions_data' -> same setting except for Advance, make this dependent on trigger (3)
+
+![image](https://user-images.githubusercontent.com/110323703/234112759-9d8bd31f-949d-49a9-a182-6edd6678ceab.png)
+- Attacht the pipelines to the triggers: go to 'pl_ingest_ecdc_data' -> edit trigger, select tr_ingest_ecdc_data'. Do the same for process and sqlize pipelines
+
+6. Monitoring: I want to monitor ADF resources, integration runtime, trigger runs, pipelines runs, activity runs
