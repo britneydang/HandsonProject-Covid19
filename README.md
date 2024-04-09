@@ -1,4 +1,4 @@
-# Hands-on Project:
+# Hands-on Project: Azure Data Factory
 Description: This project is about creating everything from scratch using all technologies/tools that are available in Microsoft Azure Data Factory using Covid-19 datasets
 
 Data Resources:
