@@ -12,13 +12,11 @@ Solution Architect:
 - I will Data Flows (transformation tool) within Data Factory.
 - All transformed data will be moved to Azure Data Lake Storage Gen2 for Machine Learning use.
 - I also push the subset of the required data to the SQL database so it can be used for reporting.
-- Visualization report such as PowerBI can be built from this data.
 
 Technologies:
 - Use Azure Data Factory for all data integration and orchestration.
 - Transformation tools: Data Flows (simple transformation, code-free)
 - Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2 (can add the big data solutions like Hadoop, Synapse Analytics), Azure SQL Database for data warehouse
-- Reporting tool: PowerBI
 
 My steps:
 1. Environment Setting Up:
