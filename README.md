@@ -16,7 +16,7 @@ Solution Architect:
 Technologies:
 - Use Azure Data Factory for all data integration and orchestration.
 - Transformation tools: Data Flows (simple transformation, code-free)
-- Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2 (can add the big data solutions like Hadoop, Synapse Analytics), Azure SQL Database for data warehouse
+- Storage solutions: Azure Blob Storage, Azure Data Lake Storage Gen2, Azure SQL Database for data warehouse
 
 My steps:
 1. Environment Setting Up:
